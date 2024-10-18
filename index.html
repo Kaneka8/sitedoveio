@@ -5,6 +5,26 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gastando o dinheiro do Veio da Havan</title>
+    <style>
+        .contador {
+            display: flex;
+            align-items: center;
+            margin-top: 20px; /* Adiciona um espaçamento acima do contador */
+        }
+        .botao {
+            cursor: pointer;
+            padding: 10px;
+            margin: 0 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .quantidade {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
     <script>
         let dinheiro = 12000000000000; // Dinheiro inicial
         const precoProduto = 16.90; // Preço do produto
@@ -15,7 +35,7 @@
         }
 
         function atualizarQuantidade() {
-            document.querySelector('.quantidade-produtos h3').innerText = quantidadeProdutos;
+            document.querySelector('.quantidade').value = quantidadeProdutos;
         }
 
         function adicionar() {
@@ -47,6 +67,14 @@
             }
         }
 
+        function alterarQuantidade(delta) {
+            if (delta === 1) {
+                adicionar();
+            } else if (delta === -1) {
+                remover();
+            }
+        }
+
         window.onload = function() {
             atualizarDinheiro(); // Atualiza o dinheiro na carga da página
             atualizarQuantidade(); // Atualiza a quantidade de produtos na carga da página
@@ -62,14 +90,13 @@
         <h3>1.200.000,00</h3>
     </div>
 
-    <div class="quantidade-produtos">
-        <h3>0</h3> <!-- Exibe a quantidade de produtos -->
-    </div>
-    
     <img src="big_mac.png" alt="Imagem-lanche" class="imagem-lanche">
-    <button onclick="remover()">-</button>
-    <input type="text" placeholder="Quantidade" disabled>
-    <button onclick="adicionar()">+</button>
     <h2>R$ 16,90</h2>
+
+    <div class="contador">
+        <button class="botao" onclick="alterarQuantidade(-1)">-</button>
+        <input type="text" id="quantidade" class="quantidade" value="0" readonly>
+        <button class="botao" onclick="alterarQuantidade(1)">+</button>
+    </div>
 </body>
 </html>
